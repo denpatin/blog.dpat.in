@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-sudo yum -y update
+sudo yum -y update > /dev/null && echo "Update repos"
 
 # Essential URLs and variables
 source /vagrant/variables.sh
