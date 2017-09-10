@@ -18,6 +18,9 @@ Vagrant.configure('2') do |config|
     vb.name = 'blog.dpat.in'
   end
 
+  # Forward port for nginx
+  config.vm.network :forwarded_port, guest: 80, host: 8080
+
   # If it's needed to update the Kernel, then uncomment the below lines
   config.vm.provision 'shell', path: 'update-kernel.sh', privileged: false
   config.vm.provision :reload
@@ -31,4 +34,7 @@ Vagrant.configure('2') do |config|
       exit 1;
     fi
   SHELL
+
+  # LEMP installation
+  config.vm.provision 'shell', path: 'install.sh', privileged: false
 end

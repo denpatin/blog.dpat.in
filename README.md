@@ -6,3 +6,4 @@
 * `vagrant up`
 * `vagrant ssh`
 * `cd /vagrant`
+* Open `http://localhost` in the browser
