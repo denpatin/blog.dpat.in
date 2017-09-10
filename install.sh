@@ -21,3 +21,14 @@ DELETE FROM user WHERE user = '';
 DELETE FROM db WHERE db = 'test' OR db = 'test_%';
 FLUSH PRIVILEGES;
 EOF
+
+# Install PHP
+sudo yum -y install php php-mysql php-fpm
+sudo sed -i -e 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/' /etc/php.ini
+sudo sed -i -e 's/listen =.*/listen = \/var\/run\/php-fpm\/php-fpm.sock/' /etc/php-fpm.d/www.conf
+sudo sed -i -e 's/;listen.owner = nobody/listen.owner = nobody/' /etc/php-fpm.d/www.conf
+sudo sed -i -e 's/;listen.group = nobody/listen.group = nobody/' /etc/php-fpm.d/www.conf
+sudo sed -i -e 's/user = apache/user = nginx/' /etc/php-fpm.d/www.conf
+sudo sed -i -e 's/group = apache/group = nginx/' /etc/php-fpm.d/www.conf
+sudo systemctl start php-fpm
+sudo systemctl enable php-fpm
