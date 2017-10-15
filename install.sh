@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 sudo yum -y update > /dev/null && echo "Update repos"
+sudo yum -y install curl unzip > /dev/null
 
 # Install Nginx
 sudo yum -y install epel-release > /dev/null
@@ -23,7 +24,7 @@ FLUSH PRIVILEGES;
 EOF
 
 # Install PHP
-sudo yum -y install php php-mysql php-fpm
+sudo yum -y install php php-mysql php-fpm > /dev/null && echo "Install PHP"
 sudo sed -i -e 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/' /etc/php.ini
 sudo sed -i -e 's/listen =.*/listen = \/var\/run\/php-fpm\/php-fpm.sock/' /etc/php-fpm.d/www.conf
 sudo sed -i -e 's/;listen.owner = nobody/listen.owner = nobody/' /etc/php-fpm.d/www.conf

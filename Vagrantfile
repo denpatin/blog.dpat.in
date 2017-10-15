@@ -22,18 +22,18 @@ Vagrant.configure('2') do |config|
   config.vm.network :forwarded_port, guest: 80, host: 8080
 
   # If it's needed to update the Kernel, then uncomment the below lines
-  config.vm.provision 'shell', path: 'update-kernel.sh', privileged: false
-  config.vm.provision :reload
-  config.vm.provision 'shell', inline: <<-SHELL
-    source /vagrant/variables.sh
-    if [ "$LOCAL_KERNEL" = "$MAINLINE_KERNEL" ];
-    then
-      echo "Your kernel is up-to-date!"
-    else
-      echo "Your kernel is $LOCAL_KERNEL, not $MAINLINE_KERNEL! Quitting...";
-      exit 1;
-    fi
-  SHELL
+  # config.vm.provision 'shell', path: 'update-kernel.sh', privileged: false
+  # config.vm.provision :reload
+  # config.vm.provision 'shell', inline: <<-SHELL
+  #   source /vagrant/variables.sh
+  #   if [ "$LOCAL_KERNEL" = "$MAINLINE_KERNEL" ];
+  #   then
+  #     echo "Your kernel is up-to-date!"
+  #   else
+  #     echo "Your kernel is $LOCAL_KERNEL, not $MAINLINE_KERNEL! Quitting...";
+  #     exit 1;
+  #   fi
+  # SHELL
 
   # LEMP installation
   config.vm.provision 'shell', path: 'install.sh', privileged: false
